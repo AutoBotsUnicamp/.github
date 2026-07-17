@@ -1,52 +1,52 @@
-# 🤖 Autobot: 2D Autonomous Navigation with ESP32 and ROS 2
+# 🤖 Autobot: Navegação Autônoma 2D com ESP32 e ROS 2
 
-Welcome to the central repository for **Autobot**, an autonomous mobile track robot featuring a decoupled, hybrid architecture.
+Bem-vindo ao repositório central do **Autobot**, um robô móvel autônomo de esteira com uma arquitetura híbrida e desacoplada.
 
-This project was developed as the final capstone project for the Computer Engineering degree at UNICAMP (School of Electrical and Computer Engineering - FEEC), under the title: *"Navegação Autônoma 2D com ESP32: Projeto e Implementação em um Robô Móvel"*.
+Este projeto foi desenvolvido como Trabalho de Conclusão de Curso para a graduação em Engenharia de Computação na UNICAMP (Faculdade de Engenharia Elétrica e de Computação - FEEC), com o título: *"Navegação Autônoma 2D com ESP32: Projeto e Implementação em um Robô Móvel"*.
 
-🎥 **[Watch the robot in action on YouTube!](https://youtu.be/cynhL9kDgR4)**
+🎥 **[Assista ao robô em ação no YouTube!](https://youtu.be/cynhL9kDgR4)**
 
-## 👥 The Team
+## 👥 A Equipe
 * Thiago Maximo Pavão
 * Vinícius Carvalho Pimpim
 * Vinícius Esperança Mantovani
 
 ---
 
-## 🏗️ System Overview
+## 🏗️ Visão Geral do Sistema
 
-Autobot utilizes a hybrid architecture that successfully decouples the robot's hardware from the host computer. By utilizing an ESP32 microcontroller as a real-time Wi-Fi bridge, the robot operates untethered while offloading computationally heavy tasks (like SLAM and path planning) to a remote host machine.
+O Autobot utiliza uma arquitetura híbrida que desacopla com sucesso o hardware do robô do computador hospedeiro. Ao utilizar um microcontrolador ESP32 como uma ponte Wi-Fi em tempo real, o robô opera sem fios, transferindo tarefas computacionalmente pesadas (como SLAM e planejamento de trajetória) para uma máquina hospedeira remota.
 
-Through a comparative analysis of SLAM algorithms, this project demonstrated that fusing encoder and IMU data via an Extended Kalman Filter (EKF) effectively corrects rotational drift, resulting in a highly robust map for autonomous navigation.
+Através de uma análise comparativa de algoritmos de SLAM, este projeto demonstrou que a fusão de dados de encoder e IMU por meio de um Filtro de Kalman Estendido (EKF) corrige efetivamente o desvio rotacional, resultando em um mapa altamente robusto para navegação autônoma.
 
-### Hardware Components
-* **Microcontroller:** ESP32
+### Componentes de Hardware
+* **Microcontrolador:** ESP32
 * **LiDAR:** YDLiDAR X3
 * **IMU:** MPU-6050
-* **Actuation:** Tracked chassis with DC motors and wheel encoders
+* **Atuação:** Chassi de esteira com motores DC e encoders nas rodas
 
 ---
 
-## 📂 Repository Structure
+## 📂 Estrutura do Repositório
 
-The system is divided into two primary sub-projects. Please visit their respective repositories for detailed installation and usage instructions:
+O sistema é dividido em dois subprojetos principais. Visite seus respectivos repositórios para obter instruções detalhadas de instalação e uso:
 
-### 1. 🧠 [autobot_controller](https://github.com/AutoBotsUnicamp/autobot_controller) (ESP32 Firmware)
-The low-level embedded firmware, developed over the ESP-IDF framework using FreeRTOS.
-* **Hardware Control:** Manages real-time motor control and sensor telemetry.
-* **Network Bridge:** Hosts TCP/UDP servers to stream LiDAR data, IMU readings, and odometry over Wi-Fi, while receiving velocity commands.
+### 1. 🧠 [autobot_controller](https://github.com/AutoBotsUnicamp/autobot_controller) (Firmware da ESP32)
+O firmware embarcado de baixo nível, desenvolvido sobre o framework ESP-IDF usando FreeRTOS.
+* **Controle de Hardware:** Gerencia o controle de motores em tempo real e a telemetria dos sensores.
+* **Ponte de Rede:** Hospeda servidores TCP/UDP para transmitir dados do LiDAR, leituras da IMU e odometria via Wi-Fi, enquanto recebe comandos de velocidade.
 
-### 2. 🗺️ [autobot_ws](https://github.com/AutoBotsUnicamp/autobot_ws) (ROS 2 Workspace)
-The high-level processing stack, designed for ROS 2 Jazzy on Ubuntu 24.04.
-* **Sensor Fusion:** Uses `robot_localization` (EKF) to fuse encoder odometry and IMU data.
-* **Mapping:** Utilizes `slam_toolbox` to generate 2D maps of the environment.
-* **Navigation:** Leverages the `Nav2` stack for autonomous trajectory planning and execution.
+### 2. 🗺️ [autobot_ws](https://github.com/AutoBotsUnicamp/autobot_ws) (Workspace ROS 2)
+O stack de processamento de alto nível, projetado para ROS 2 Jazzy no Ubuntu 24.04.
+* **Fusão de Sensores:** Usa `robot_localization` (EKF) para fundir a odometria dos encoders e dados da IMU.
+* **Mapeamento:** Utiliza o `slam_toolbox` para gerar mapas 2D do ambiente.
+* **Navegação:** Aproveita o stack `Nav2` para o planejamento e execução de trajetórias autônomas.
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Como Começar
 
-If you are setting up the project from scratch:
-1. Clone the firmware repository and flash your ESP32.
-2. Clone the ROS 2 workspace onto your host machine, install the dependencies, and build using `colcon`.
-3. Connect your host machine to the same network as the ESP32 and launch the base drivers to begin mapping or navigating!
+Se você estiver configurando o projeto do zero:
+1. Clone o repositório do firmware e grave (flash) na sua ESP32.
+2. Clone o workspace ROS 2 na sua máquina hospedeira, instale as dependências e compile usando o `colcon`.
+3. Conecte sua máquina hospedeira à mesma rede da ESP32 e inicie os drivers base para começar a mapear ou navegar!
